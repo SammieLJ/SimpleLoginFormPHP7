@@ -18,6 +18,7 @@ Just import 'login.sql' in your MySQL using CLI or phpMyAdmin or HeidiSQL, MySQL
 ```php
 // connect to the server and select database
 $mysqli = new mysqli("localhost", "root", "", "login");
-Default username is 'testuser' and password is 'testuserpass'. Change it accordingly.
 ```
+Default username is 'testuser' and password is 'testuserpass'. Change it accordingly.
+
 Further steps, firstly immidietly upgrade php code to encode and use hashed passwords in mysql. And store succefuly checked user login into $_SESSION.
