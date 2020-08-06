@@ -27,7 +27,7 @@ $statement->execute();
 // if we have results from sql user query
 $result = $statement->get_result();
 if ($result->num_rows > 0) {
-    echo "Number of rows ... " . $statement->num_rows . "<br>";
+    //echo "Number of rows ... " . $statement->num_rows . "<br>";
     // output data of each row
   while($row = $result->fetch_assoc()) {
     if ($row['username'] == $username && $row['password'] == $password) {
