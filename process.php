@@ -18,17 +18,20 @@ $password = stripcslashes($password);
 $username = $mysqli->real_escape_string($username);
 $password = $mysqli->real_escape_string($password);
 
-
-
 // query the database for user
-$result = $mysqli->query("select * from users where username = '$username' and password = '$password'");
+$statement = $mysqli->prepare("select * from users where username = ? and password = ?");
+$statement->bind_param("ss", $username, $password);
+
+$statement->execute();
 
 // if we have results from sql user query
+$result = $statement->get_result();
 if ($result->num_rows > 0) {
+    echo "Number of rows ... " . $statement->num_rows . "<br>";
     // output data of each row
   while($row = $result->fetch_assoc()) {
     if ($row['username'] == $username && $row['password'] == $password) {
-        echo "Login success! Welcome ".$row['username'];
+        echo "Login success! Welcome <b>" . $row['username'] . "</b><br>";
     } else {
         echo "Failed to login!";
     }
@@ -37,4 +40,5 @@ if ($result->num_rows > 0) {
     die("Username or password not found");
 }
 
+$statement->close();
 $mysqli->close();
